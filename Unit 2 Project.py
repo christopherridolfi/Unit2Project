@@ -107,42 +107,40 @@ comppoints = []#This is the point counter for the computer.
 urpoints = []#This the the score counter for the player.
 """This is also used to activate the win game lines."""
 v =0
-
-
-
-while t == 0:#does the following until I guess appropreatly 3 times.
-    chooser1 = input("Choose a number between 1 and 2")#Allows you to input a number you want to guess.
-    try:
-        if int(chooser1) > 0 and int(chooser1) <= 2:
-            history.append(int(chooser1))#Adds the number to a list.
-            del history[0]#deletes the first index in the list so you can only have a history of 3.
-            whilelist.append(1)#adds a value to a list to make a history only including 3 numbers.
-            if len(whilelist) == 2:#ends the while loop once I made my history.
-                t = t + 1#ends the while loop;
-                b = b+1#ends the b while list.
-                break
-            else:
-                chooser1 = input("Choose a number between 1 and 2")  # makes sure they input either 1 or 2 as history.
-    except ValueError:#I did this becasue it would error out if you didn't enter a number so now it just redoes the input.
-            chooser1 = input("Choose a number between 1 and 2")#makes sure they input either 1 or 2 as history.
+q1 = input("What is the first number in your history.")#This asks what the first number of your history is.
+q2 = input("What is the second number in your history")#This asks what the second number of your history is.
+q3 = input("What is the third number in your history.")#This asks the third.
+"""I did this so that the player can choose their past history and it gets them more involved in the game they will
+play with the computer."""
+if q1 != "1" and q1 != "2":
+    q1 = input("What Is the First Number in Your History")
+if q2 != "1" and q2 != "2":
+    q2 = input("What Is the Second Number in Your History")
+if q3 != "1" and q3 != "2":
+    q3 = input("What Is the Second Number In Your History")
+"""This is defensive programing. I did this so you can only put the 2 values allowed in your history."""
+history[0] = int(q1)
+history[1] = int(q2)
+history[2] = int(q3)
+"""This adds the inputs to your history. This adds them in the exact index I want and they inputed."""
 while v == 0:
-    if len(comppoints) == 30:#this sees if the computer guessed right enough times to win the game.
-        print("The Computer Wins")#Prints the you win message.
-        break#this breaks the while loop so the game will end.
-    elif len(urpoints) == 30:#This sees if the computer guessed wrong enough times to see if you win the game.
-        print("You win")
-        break#breaks the while loop for the same reason above.
+    if urpoints == 30:
+        exit("You Win")
+    if comppoints == 30:
+        exit("The computer Wins")
     print("The computer is choosing....")#Shows the viewer the computer is thinking.(dramatic effect)
-    history.sort()#sorts the history list from lowest number to highest.
-    tuple5 = (history[0],history[1],history[2])#puts the three sorted history values into a tuple to be used later.
-    prob = {(1,2,2):2,(1,1,1):1,(1,1,2):1,(2,2,2):2}
+    print("Your History is " + str(history))#This displays your history.
+    finalg = input("What is your Guess?")  # asks what you want your final answer to be so the computer may attempt to guess.
+    if finalg != "1" and finalg != "2":
+        finalg = input("What is Your Guess?")
+    history.append(int(finalg))  # Adds the number to a list.
+    del history[0]  # deletes the first index in the list so you can only have a history of 3.
+    #history.sort()#sorts the history list from lowest number to highest.
+    tuple5 = (int(history[0]),int(history[1]),int(history[2]))#puts the three sorted history values into a tuple to be used later.
+    prob = {(2,2,2):2,(1,1,1):1,(1,2,1):1,(2,1,2):2,(1,1,2):1,(2,2,1):2,(2,1,1):1,(1,2,2):2}
     """This is a dictionary with all the probabilities the computer will guess. This uses the tuple
     as the key to activate the value the computer will guess."""
     answer = (prob[tuple5])#this makes the variable equal to the value you want.
-    finalg = input("What is your Guess?")#asks what you want your final answer to be so the computer may attempt to guess.
-    history.append(int(finalg))  # Adds the number to a list.
-    print(history)
-    del history[0]  # deletes the first index in the list so you can only have a history of 3.
     if int(finalg) == answer:#activates the lines below if you and the computer guess the same number.
         print("The Computer guessed The Same As You")#prints this message.
         comppoints.append(1)#adds a point for the computer into the comppoints list.
@@ -153,7 +151,5 @@ while v == 0:
         print("The Computer Guessed Wrong")#prints that the computer guessed wrong if your value doesn't match there guess.
         urpoints.append(1)#adds a point to your point list.
         print("You Have " + str(len(urpoints)) + " point(s)")#prints how many points you have.
-        t = t-1#reintiates my while loop.
-        whilelist = []#remaking my whilelist empty so I can use it again.
         """This is the option in where the computer guessed wrong. This peice of code adds a point to your list and
          prints out how many points I have."""
