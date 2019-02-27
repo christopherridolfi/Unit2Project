@@ -124,10 +124,10 @@ history[1] = int(q2)
 history[2] = int(q3)
 """This adds the inputs to your history. This adds them in the exact index I want and they inputed."""
 while v == 0:
-    if urpoints == 30:
-        exit("You Win")
-    if comppoints == 30:
-        exit("The computer Wins")
+    if len(urpoints) == 30:
+        exit("You Win")#Stops the whole file when the player gets to 30 points.
+    if len(comppoints) == 30:
+        exit("The computer Wins")#ends the code when the computer gets 30 points.
     print("The computer is choosing....")#Shows the viewer the computer is thinking.(dramatic effect)
     print("Your History is " + str(history))#This displays your history.
     finalg = input("What is your Guess?")  # asks what you want your final answer to be so the computer may attempt to guess.
