@@ -140,6 +140,8 @@ while v == 0:
     prob = {(2,2,2):2,(1,1,1):1,(1,2,1):1,(2,1,2):2,(1,1,2):1,(2,2,1):2,(2,1,1):1,(1,2,2):2}
     """This is a dictionary with all the probabilities the computer will guess. This uses the tuple
     as the key to activate the value the computer will guess."""
+    if len(history) <3:
+        answer = 2
     answer = (prob[tuple5])#this makes the variable equal to the value you want.
     if int(finalg) == answer:#activates the lines below if you and the computer guess the same number.
         print("The Computer guessed The Same As You")#prints this message.
